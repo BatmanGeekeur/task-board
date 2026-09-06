@@ -28,7 +28,7 @@ Un petit tableau kanban fait pour apprendre React : trois colonnes (À faire, En
 ## Lancer le projet en local
 
 ```bash
-git clone https://github.com/<ton-pseudo>/task-board.git
+git clone https://github.com/BatmanGeekeur/task-board.git
 cd task-board
 npm install
 npm run dev
