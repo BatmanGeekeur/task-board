@@ -1,13 +1,54 @@
+import { useEffect, useRef, useState } from 'react'
 import { useDraggable } from '@dnd-kit/core'
 
-export default function TaskCard({ task, next, onMove, onRemove, dragging }) {
+export default function TaskCard({ task, next, onMove, onRemove, onEdit, dragging }) {
+  const [isEditing, setIsEditing] = useState(false)
+  const [draftTitle, setDraftTitle] = useState(task.title)
+  const inputRef = useRef(null)
+
   const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({
     id: task.id,
+    disabled: isEditing,
   })
 
   const style = transform
     ? { transform: `translate3d(${transform.x}px, ${transform.y}px, 0)` }
     : undefined
+
+  useEffect(() => {
+    if (isEditing) {
+      inputRef.current?.focus()
+      inputRef.current?.select()
+    }
+  }, [isEditing])
+
+  function startEdit() {
+    setDraftTitle(task.title)
+    setIsEditing(true)
+  }
+
+  function commitEdit() {
+    const trimmed = draftTitle.trim()
+    if (trimmed && trimmed !== task.title) {
+      onEdit(task.id, trimmed)
+    }
+    setIsEditing(false)
+  }
+
+  function cancelEdit() {
+    setDraftTitle(task.title)
+    setIsEditing(false)
+  }
+
+  function handleKeyDown(e) {
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      commitEdit()
+    } else if (e.key === 'Escape') {
+      e.preventDefault()
+      cancelEdit()
+    }
+  }
 
   return (
     <article
@@ -17,8 +58,33 @@ export default function TaskCard({ task, next, onMove, onRemove, dragging }) {
       {...listeners}
       {...attributes}
     >
-      <p className="task-card__title">{task.title}</p>
+      {isEditing ? (
+        <input
+          ref={inputRef}
+          className="task-card__edit-input"
+          value={draftTitle}
+          onChange={(e) => setDraftTitle(e.target.value)}
+          onBlur={commitEdit}
+          onKeyDown={handleKeyDown}
+          onPointerDown={(e) => e.stopPropagation()}
+        />
+      ) : (
+        <p className="task-card__title" onDoubleClick={startEdit}>
+          {task.title}
+        </p>
+      )}
+
       <div className="task-card__actions">
+        {!isEditing && (
+          <button
+            type="button"
+            className="task-card__edit"
+            onClick={startEdit}
+            aria-label={`Modifier "${task.title}"`}
+          >
+            ✎
+          </button>
+        )}
         {next && (
           <button type="button" onClick={() => onMove(task.id, next)}>
             Déplacer →

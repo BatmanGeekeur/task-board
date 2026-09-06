@@ -56,6 +56,6 @@ src/
 ## Idées pour la suite
 
 - [x] Glisser-déposer entre les colonnes (`@dnd-kit/core`)
-- [ ] Éditer le titre d'une tâche directement
+- [x] Éditer le titre d'une tâche directement
 - [ ] Plusieurs tableaux
 - [ ] Synchroniser avec un backend au lieu de `localStorage`

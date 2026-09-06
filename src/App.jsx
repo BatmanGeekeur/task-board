@@ -44,13 +44,19 @@ export default function App() {
     setTasks((prev) => prev.filter((task) => task.id !== id))
   }
 
+  function editTask(id, title) {
+    setTasks((prev) =>
+      prev.map((task) => (task.id === id ? { ...task, title } : task))
+    )
+  }
+
   return (
     <div className="app">
       <header className="app-header">
         <h1>Task Board</h1>
-        <p className="app-subtitle">A small kanban, built while learning React.</p>
+        <p className="app-subtitle">Un tableau de tâches léger et intuitif, développé avec React et Vite.</p>
       </header>
-      <Board tasks={tasks} onAdd={addTask} onMove={moveTask} onRemove={removeTask} />
+      <Board tasks={tasks} onAdd={addTask} onMove={moveTask} onRemove={removeTask} onEdit={editTask} />
     </div>
   )
 }

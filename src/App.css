@@ -138,6 +138,22 @@
   color: var(--ink);
 }
 
+.task-card__edit {
+  padding: 4px 7px !important;
+}
+
+.task-card__edit-input {
+  flex: 1;
+  border: 1px solid var(--teal);
+  padding: 4px 6px;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.task-card__edit-input:focus {
+  outline: none;
+}
+
 .task-card__remove {
   padding: 4px 7px !important;
 }

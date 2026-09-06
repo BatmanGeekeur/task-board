@@ -9,7 +9,7 @@ const COLUMNS = [
   { status: 'done', label: 'Done', next: null },
 ]
 
-export default function Board({ tasks, onAdd, onMove, onRemove }) {
+export default function Board({ tasks, onAdd, onMove, onRemove, onEdit }) {
   const [activeTask, setActiveTask] = useState(null)
 
   // Requires a small movement before a click becomes a drag,
@@ -51,13 +51,14 @@ export default function Board({ tasks, onAdd, onMove, onRemove }) {
             onAdd={col.status === 'todo' ? onAdd : null}
             onMove={onMove}
             onRemove={onRemove}
+            onEdit={onEdit}
           />
         ))}
       </div>
 
       <DragOverlay>
         {activeTask && (
-          <TaskCard task={activeTask} next={null} onMove={() => {}} onRemove={() => {}} dragging />
+          <TaskCard task={activeTask} next={null} onMove={() => {}} onRemove={() => {}} onEdit={() => {}} dragging />
         )}
       </DragOverlay>
     </DndContext>
