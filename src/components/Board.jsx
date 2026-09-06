@@ -9,14 +9,17 @@ const COLUMNS = [
   { status: 'done', label: 'Done', next: null },
 ]
 
-export default function Board({ tasks, onAdd, onMove, onRemove, onEdit }) {
+export default function Board({
+  tasks,
+  otherBoards,
+  onAdd,
+  onMove,
+  onMoveToBoard,
+  onRemove,
+  onEdit,
+}) {
   const [activeTask, setActiveTask] = useState(null)
-
-  // Requires a small movement before a click becomes a drag,
-  // so buttons inside cards (move/delete) still work with a plain click.
-  const sensors = useSensors(
-    useSensor(PointerSensor, { activationConstraint: { distance: 6 } })
-  )
+  const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 6 } }))
 
   function handleDragStart(event) {
     const task = tasks.find((t) => t.id === event.active.id)
@@ -29,17 +32,11 @@ export default function Board({ tasks, onAdd, onMove, onRemove, onEdit }) {
     if (!over) return
     const newStatus = over.id
     const task = tasks.find((t) => t.id === active.id)
-    if (task && task.status !== newStatus) {
-      onMove(active.id, newStatus)
-    }
+    if (task && task.status !== newStatus) onMove(active.id, newStatus)
   }
 
   return (
-    <DndContext
-      sensors={sensors}
-      onDragStart={handleDragStart}
-      onDragEnd={handleDragEnd}
-    >
+    <DndContext sensors={sensors} onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
       <div className="board">
         {COLUMNS.map((col) => (
           <Column
@@ -50,12 +47,13 @@ export default function Board({ tasks, onAdd, onMove, onRemove, onEdit }) {
             tasks={tasks.filter((t) => t.status === col.status)}
             onAdd={col.status === 'todo' ? onAdd : null}
             onMove={onMove}
+            otherBoards={otherBoards}
+            onMoveToBoard={onMoveToBoard}
             onRemove={onRemove}
             onEdit={onEdit}
           />
         ))}
       </div>
-
       <DragOverlay>
         {activeTask && (
           <TaskCard task={activeTask} next={null} onMove={() => {}} onRemove={() => {}} onEdit={() => {}} dragging />

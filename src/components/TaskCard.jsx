@@ -1,7 +1,16 @@
 import { useEffect, useRef, useState } from 'react'
 import { useDraggable } from '@dnd-kit/core'
 
-export default function TaskCard({ task, next, onMove, onRemove, onEdit, dragging }) {
+export default function TaskCard({
+  task,
+  next,
+  otherBoards = [],
+  onMove,
+  onMoveToBoard,
+  onRemove,
+  onEdit,
+  dragging,
+}) {
   const [isEditing, setIsEditing] = useState(false)
   const [draftTitle, setDraftTitle] = useState(task.title)
   const inputRef = useRef(null)
@@ -89,6 +98,22 @@ export default function TaskCard({ task, next, onMove, onRemove, onEdit, draggin
           <button type="button" onClick={() => onMove(task.id, next)}>
             Déplacer →
           </button>
+        )}
+        {otherBoards.length > 0 && (
+          <select
+            className="task-card__board-select"
+            value=""
+            onChange={(event) => {
+              if (event.target.value) onMoveToBoard(task.id, event.target.value)
+            }}
+            onPointerDown={(event) => event.stopPropagation()}
+            aria-label={`Déplacer "${task.title}" vers un autre tableau`}
+          >
+            <option value="">Tableau…</option>
+            {otherBoards.map((board) => (
+              <option key={board.id} value={board.id}>{board.name}</option>
+            ))}
+          </select>
         )}
         <button
           type="button"

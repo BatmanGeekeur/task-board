@@ -138,6 +138,20 @@
   color: var(--ink);
 }
 
+.task-card__board-select {
+  max-width: 120px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  padding: 4px 6px;
+  color: var(--ink-soft);
+  font-size: 12px;
+}
+
+.task-card__board-select:focus {
+  outline: 2px solid var(--teal);
+  outline-offset: 1px;
+}
+
 .task-card__edit {
   padding: 4px 7px !important;
 }

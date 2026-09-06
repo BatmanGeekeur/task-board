@@ -2,7 +2,18 @@ import { useDroppable } from '@dnd-kit/core'
 import TaskCard from './TaskCard'
 import AddTaskForm from './AddTaskForm'
 
-export default function Column({ status, label, next, tasks, onAdd, onMove, onRemove, onEdit }) {
+export default function Column({
+  status,
+  label,
+  next,
+  tasks,
+  otherBoards,
+  onAdd,
+  onMove,
+  onMoveToBoard,
+  onRemove,
+  onEdit,
+}) {
   const { setNodeRef, isOver } = useDroppable({ id: status })
 
   return (
@@ -22,6 +33,8 @@ export default function Column({ status, label, next, tasks, onAdd, onMove, onRe
             task={task}
             next={next}
             onMove={onMove}
+            otherBoards={otherBoards}
+            onMoveToBoard={onMoveToBoard}
             onRemove={onRemove}
             onEdit={onEdit}
           />
