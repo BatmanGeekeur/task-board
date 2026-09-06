@@ -1,0 +1,43 @@
+:root {
+  --ink: #182430;
+  --ink-soft: #4d5b68;
+  --paper: #eef1f0;
+  --surface: #ffffff;
+  --line: #d7dcd9;
+  --teal: #1f6f63;
+  --amber: #c98a2b;
+  --clay: #a8452f;
+
+  --sans: 'Segoe UI', system-ui, Roboto, sans-serif;
+  --mono: 'SFMono-Regular', ui-monospace, Consolas, monospace;
+
+  color-scheme: light;
+  color: var(--ink);
+  background: var(--paper);
+  font: 16px/1.5 var(--sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+}
+
+h1, h2 {
+  margin: 0;
+  color: var(--ink);
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+input {
+  font: inherit;
+}

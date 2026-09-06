@@ -1,0 +1,155 @@
+.app {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 48px 24px 64px;
+}
+
+.app-header {
+  margin-bottom: 32px;
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 16px;
+}
+
+.app-header h1 {
+  font-size: 32px;
+  letter-spacing: -0.5px;
+}
+
+.app-subtitle {
+  margin-top: 6px;
+  color: var(--ink-soft);
+  font-size: 14px;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 720px) {
+  .board {
+    grid-template-columns: 1fr;
+  }
+}
+
+.column {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--ink-soft);
+  padding: 16px;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+}
+
+.column--todo {
+  border-top-color: var(--clay);
+}
+.column--doing {
+  border-top-color: var(--amber);
+}
+.column--done {
+  border-top-color: var(--teal);
+}
+
+.column__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.column__header h2 {
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: none;
+}
+
+.column__count {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.column__list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.column__empty {
+  color: var(--ink-soft);
+  font-size: 13px;
+  font-style: italic;
+}
+
+.task-card {
+  border: 1px solid var(--line);
+  padding: 10px 12px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.task-card__title {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.task-card__actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.task-card__actions button {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  padding: 4px 8px;
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+.task-card__actions button:hover {
+  border-color: var(--ink-soft);
+  color: var(--ink);
+}
+
+.task-card__remove {
+  padding: 4px 7px !important;
+}
+
+.add-task {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.add-task input {
+  flex: 1;
+  border: 1px solid var(--line);
+  padding: 8px 10px;
+  font-size: 13px;
+}
+
+.add-task input:focus {
+  outline: 2px solid var(--teal);
+  outline-offset: 1px;
+}
+
+.add-task button {
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--surface);
+  padding: 8px 14px;
+  font-size: 13px;
+}
+
+.add-task button:hover {
+  background: var(--teal);
+  border-color: var(--teal);
+}
