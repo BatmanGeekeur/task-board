@@ -1,9 +1,15 @@
+import { useDroppable } from '@dnd-kit/core'
 import TaskCard from './TaskCard'
 import AddTaskForm from './AddTaskForm'
 
 export default function Column({ status, label, next, tasks, onAdd, onMove, onRemove }) {
+  const { setNodeRef, isOver } = useDroppable({ id: status })
+
   return (
-    <section className={`column column--${status}`}>
+    <section
+      ref={setNodeRef}
+      className={`column column--${status} ${isOver ? 'column--over' : ''}`}
+    >
       <header className="column__header">
         <h2>{label}</h2>
         <span className="column__count">{String(tasks.length).padStart(2, '0')}</span>
@@ -19,7 +25,7 @@ export default function Column({ status, label, next, tasks, onAdd, onMove, onRe
             onRemove={onRemove}
           />
         ))}
-        {tasks.length === 0 && <p className="column__empty">Nothing here yet.</p>}
+        {tasks.length === 0 && <p className="column__empty">Rien ici pour l'instant.</p>}
       </div>
 
       {onAdd && <AddTaskForm onAdd={onAdd} />}

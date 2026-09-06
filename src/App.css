@@ -53,6 +53,12 @@
   border-top-color: var(--teal);
 }
 
+.column--over {
+  background: #f2f6f4;
+  outline: 2px dashed var(--teal);
+  outline-offset: -6px;
+}
+
 .column__header {
   display: flex;
   align-items: baseline;
@@ -87,11 +93,24 @@
 
 .task-card {
   border: 1px solid var(--line);
+  background: var(--surface);
   padding: 10px 12px;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 8px;
+  cursor: grab;
+  touch-action: none;
+}
+
+.task-card--ghost {
+  opacity: 0.35;
+}
+
+.task-card--dragging {
+  cursor: grabbing;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  border-color: var(--teal);
 }
 
 .task-card__title {

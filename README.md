@@ -2,12 +2,12 @@
 
 Un petit tableau kanban fait pour apprendre React : trois colonnes (À faire, En cours, Terminé), on peut ajouter des tâches, les faire avancer, les supprimer. Les tâches sont sauvegardées dans le `localStorage`, donc un rafraîchissement de la page ne vide pas le tableau.
 
-**[Démo en ligne →](#)** *(ajoute ton lien Vercel/Netlify ici une fois déployé)*
+**[Démo en ligne →](https://task-board-pi-peach.vercel.app/)**
 
 ## Fonctionnalités
 
 - Ajouter une tâche dans la colonne "À faire"
-- Faire avancer une tâche vers la colonne suivante en un clic
+- Faire avancer une tâche vers la colonne suivante en un clic, ou la glisser-déposer directement dans une autre colonne
 - Supprimer n'importe quelle tâche
 - L'état survit à un rechargement de page (sauvegardé dans `localStorage`)
 
@@ -15,6 +15,7 @@ Un petit tableau kanban fait pour apprendre React : trois colonnes (À faire, En
 
 - [React](https://react.dev/) 19 (composants fonctionnels + hooks)
 - [Vite](https://vitejs.dev/) comme outil de build
+- [@dnd-kit/core](https://dndkit.com/) pour le glisser-déposer
 - CSS simple, sans librairie UI
 
 ## Ce que j'ai appris en le construisant
@@ -24,11 +25,12 @@ Un petit tableau kanban fait pour apprendre React : trois colonnes (À faire, En
 - Afficher des listes en toute sécurité avec `.map()` et des `key` stables
 - Les formulaires contrôlés (`AddTaskForm`)
 - Synchroniser le state avec `localStorage` grâce à `useEffect`
+- Implémenter le glisser-déposer avec `@dnd-kit/core` (`useDraggable`, `useDroppable`, `DndContext`, `DragOverlay`)
 
 ## Lancer le projet en local
 
 ```bash
-git clone https://github.com/BatmanGeekeur/task-board.git
+git clone https://github.com/BatmanGeekeur/task-board
 cd task-board
 npm install
 npm run dev
@@ -53,7 +55,7 @@ src/
 
 ## Idées pour la suite
 
-- [ ] Glisser-déposer entre les colonnes (par ex. avec `@dnd-kit/core`)
+- [x] Glisser-déposer entre les colonnes (`@dnd-kit/core`)
 - [ ] Éditer le titre d'une tâche directement
 - [ ] Plusieurs tableaux
 - [ ] Synchroniser avec un backend au lieu de `localStorage`
