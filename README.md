@@ -37,7 +37,7 @@ Un tableau kanban fait pour apprendre React : plusieurs tableaux, chacun avec se
 ## Lancer le projet en local
 
 ```bash
-git clone https://github.com/BatmanGeekeur/task-board
+git clone https://github.com/Ferr0zzz/task-board
 cd task-board
 npm install
 npm run dev
